@@ -1,11 +1,10 @@
-package com.crud.study.core;
+package com.crud.study.domain;
 
 
 import com.crud.study.dto.BoardRequestDTO;
 import com.crud.study.dto.BoardResponseDTO;
 import com.crud.study.dto.ListBoardResponseDTO;
 import com.crud.study.dto.ResponseMessageDTO;
-import com.crud.study.infrastructure.BoardMapper;
 
 import java.time.LocalDateTime;
 import java.util.List;

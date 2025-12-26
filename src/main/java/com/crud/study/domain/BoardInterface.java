@@ -1,4 +1,4 @@
-package com.crud.study.core;
+package com.crud.study.domain;
 
 import com.crud.study.dto.BoardRequestDTO;
 import com.crud.study.dto.BoardResponseDTO;

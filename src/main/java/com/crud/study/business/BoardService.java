@@ -1,6 +1,6 @@
 package com.crud.study.business;
 
-import com.crud.study.core.Board;
+import com.crud.study.domain.Board;
 import com.crud.study.dto.BoardRequestDTO;
 import com.crud.study.dto.BoardResponseDTO;
 import com.crud.study.dto.ListBoardResponseDTO;

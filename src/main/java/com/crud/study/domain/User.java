@@ -1,4 +1,4 @@
-package com.crud.study.core;
+package com.crud.study.domain;
 
 public class User {
 

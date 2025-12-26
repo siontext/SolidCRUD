@@ -1,9 +1,8 @@
 package com.crud.study.dto;
 
 
-import com.crud.study.core.Board;
+import com.crud.study.domain.Board;
 
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 // 게시판 조회, 상세 조회에 대한 DTO

@@ -1,6 +1,6 @@
 package com.crud.study.infrastructure;
 
-import com.crud.study.core.Board;
+import com.crud.study.domain.Board;
 import com.crud.study.dto.BoardRequestDTO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
