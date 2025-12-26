@@ -5,6 +5,8 @@ import com.crud.study.dto.BoardRequestDTO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 
 //JAP 인터페이스 처럼 필요한 조회 메서드 작성 -> 조회 메서드 구현은 xml에서
 @Mapper
@@ -27,4 +29,11 @@ public interface BoardMapper {
 
     // 게시판 삭제 (id로)
     public void deleteBoardSql(long id);
+
+    // 이메일로 사용자가 작성한 게시판 모두 조회
+    public List<Board> findAllBoardByEmailSql(String email);
+    
+    // 제목으로 게시판 상세 조회
+    public Board findBoardTitleSql(String title);
+
 }

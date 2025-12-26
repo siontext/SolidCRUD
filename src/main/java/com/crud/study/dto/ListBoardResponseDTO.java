@@ -1,31 +1,35 @@
 package com.crud.study.dto;
 
+import com.crud.study.domain.Board;
+
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 // 게시판 리스트조회 응답
 public class ListBoardResponseDTO {
 
-    // 작성자명
-    private final String userNm;
-
-    // 작성자 메일
-    private final String email;
+    // 게시판 PK
+    private final long id;
 
     // 제목
     private final String title;
+
+    // 작성자 메일
+    private final String email;
 
     // 조회수
     private final String viewCount;
 
     // 수정날짜
-    private final Timestamp updateTime;
+    private final LocalDateTime updateTime;
 
-
-    public ListBoardResponseDTO(String userNm, String email, String title, String viewCount, Timestamp updateTime){
-        this.userNm = userNm;
-        this.email = email;
-        this.title = title;
-        this.viewCount = viewCount;
-        this.updateTime = updateTime;
+    public ListBoardResponseDTO (Board board) {
+        this.id = board.getId();
+        this.title = board.getTitle();
+        this.email = board.getEmail();
+        this.viewCount = board.getContent();
+        this.updateTime = board.getUpdatedAt();
     }
+
+
 }

@@ -8,7 +8,7 @@ public class BoardRequestDTO {
     // 게시판 id
     private final long id;
 
-    // 작성자명
+    // 작성자 이메일
     private final String email;
 
     // 제목

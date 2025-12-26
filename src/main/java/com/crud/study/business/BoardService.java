@@ -6,15 +6,13 @@ import com.crud.study.dto.BoardResponseDTO;
 import com.crud.study.dto.ListBoardResponseDTO;
 import com.crud.study.dto.ResponseMessageDTO;
 import com.crud.study.infrastructure.BoardMapper;
+import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
-/*** 서비스에서 컨트롤러 반환할때 -> DTO에 담아줘야제?  (수정할거 많음)
- *
- *
- *
- * **/
+@Service
 public class BoardService {
 
     private final BoardMapper boardMapper;
@@ -76,13 +74,28 @@ public class BoardService {
     /*** 유저가 작성한 게시판 리스트 전체 조회 **/
     public List<ListBoardResponseDTO> SearchListBoard(BoardRequestDTO requestDTO){
 
-        // 유저 이메일로 작성한 게시판 전체 찾기
+        // 유저 이메일로 조회한 전체 게시판 객체 리스트
+        List<Board> boards = boardMapper.findAllBoardByEmailSql(requestDTO.getEmail());
 
-        // 게시판 객체를 ->
+        // 게시판 객체 리스트를 -> DTO List에 담아주기
+        List<ListBoardResponseDTO> boardResponseDTOS = new ArrayList<>();
+        for (Board board : boards){
+            boardResponseDTOS.add(new ListBoardResponseDTO(board));
+        }
 
-        return null;
+        // 변환된 DTO 리스트 반환하기
+        return boardResponseDTOS;
     }
 
-    // 특정 게시판 상세 조회
+    /** 특정 게시판 상세 조회 (제목을 통해) **/
+    public BoardResponseDTO SearchBoard(BoardRequestDTO requestDTO){
+
+        // 제목으로 게시글 조회
+        Board board = boardMapper.findBoardTitleSql(requestDTO.getTitle());
+
+        // 조회된 게시글 DTO에 담아서 반환
+        return new BoardResponseDTO(board);
+
+    }
 
 }
