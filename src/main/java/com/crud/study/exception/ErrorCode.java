@@ -93,4 +93,14 @@ public enum ErrorCode {
         this.divisionCode=divisionCode;
         this.message=message;
     }
+
+    public int getStatus() {
+        return status;
+    }
+    public String getDivisionCode() {
+        return divisionCode;
+    }
+    public String getMessage() {
+        return message;
+    }
 }
