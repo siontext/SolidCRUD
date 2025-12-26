@@ -63,7 +63,7 @@ public class BoardService {
         // 삭제할 게시판 조회 (클라이언트가 삭제할 게시판 id를 DTO로 보내주겠죠?)
         Board board = boardMapper.findBoardSql(requestDTO.getId()); // 없으면 오류라고 해주기 -> 익셉션 추가(글로벌 익셉션)
 
-        // 게시판 삭제 (id가져와서)
+        // 게시판 삭제 (핵심 비즈니스 로직 -> 그러나 DB 작업이기 때문에 인프라 레이어에서 처리)
         boardMapper.deleteBoardSql(board.getId());
 
         // 메시지 DTO에 담아서 반환
