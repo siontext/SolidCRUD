@@ -31,5 +31,21 @@ public class ListBoardResponseDTO {
         this.updateTime = board.getUpdatedAt();
     }
 
+    public long getId(){
+        return id;
+    }
+
+    public String getTitle(){
+        return title;
+    }
+
+    public String getEmail(){
+        return email;
+    }
+
+    public String getViewCount(){
+        return viewCount;
+    }
+
 
 }

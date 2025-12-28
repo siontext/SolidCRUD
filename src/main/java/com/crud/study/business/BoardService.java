@@ -24,7 +24,7 @@ public class BoardService {
     public ResponseMessageDTO createBoard (BoardCreateRequestDTO requestDTO){
 
         // 게시판 객체 생성 (핵심 비즈니스 로직 DDD)
-        Board board = new Board(requestDTO);
+        Board board = new Board(requestDTO.getEmail(), requestDTO.getTitle(), requestDTO.getContent());
 
         // 생성된 객체 -> DB 저장
         boardMapper.createBoardSql(board);
@@ -38,14 +38,11 @@ public class BoardService {
     /** 게시판 수정**/
     public BoardResponseDTO updateBoard(BoardUpdateRequestDto requestDTO){
 
-        // 이메일 + 제목으로 게시판 id찾기 (클라이언트가 게시판 id는 따로 안준다는 가정)
-        long findBoardId = boardMapper.findBoardIdSql(requestDTO);
-
         // ID로 게시판 찾기
-        Board findBoard = boardMapper.findBoardSql(findBoardId);
+        Board findBoard = boardMapper.findBoardSql(requestDTO.getId());
 
         // 게시판 내용 변경 (핵심 비즈니스 로직 DDD) (찾은 게시판 ID + 리퀘스트에 담긴 수정내용)
-        findBoard.UpdateBoard(findBoardId, requestDTO);
+        findBoard.UpdateBoard(requestDTO);
 
         // 변경된 내용 저장 -> DB 저장 + 객체 반환
         Board saveBoard = boardMapper.saveUpdateBoardSql(findBoard);
@@ -57,22 +54,21 @@ public class BoardService {
     /*** 게시판 삭제  -> 조회 + 삭제가 인프라 계층에서 이뤄지는 작업이다 보니 도메인객체가 따로 처리할 비즈니스 로직은 없어 보입니다.**/
     public ResponseMessageDTO DeleteBoard(BoardDeleteRequestDto requestDTO){
 
-        // 삭제할 게시판 조회 (클라이언트가 삭제할 게시판 id를 DTO로 보내주겠죠?)
-        Board board = boardMapper.findBoardSql(requestDTO.getId()); // 없으면 오류라고 해주기 -> 익셉션 추가(글로벌 익셉션)
-
         // 게시판 삭제 (핵심 비즈니스 로직 -> 그러나 DB 작업이기 때문에 인프라 레이어에서 처리)
-        boardMapper.deleteBoardSql(board.getId());
+        boardMapper.deleteBoardSql(requestDTO.getId());
+
+        String message =  "{requestDTO.title}게시판 삭제가 완료되었습니다.";
 
         // 메시지 DTO에 담아서 반환
-        return board.DeleteBoard(requestDTO);
+        return new ResponseMessageDTO(message);
     }
 
 
     /*** 유저가 작성한 게시판 리스트 전체 조회 **/
-    public List<ListBoardResponseDTO> SearchListBoard(BoardSearchListRequestDto requestDTO){
+    public List<ListBoardResponseDTO> SearchListBoard(String email){
 
         // 유저 이메일로 조회한 전체 게시판 객체 리스트
-        List<Board> boards = boardMapper.findAllBoardByEmailSql(requestDTO.getEmail());
+        List<Board> boards = boardMapper.findAllBoardByEmailSql(email);
 
         // 게시판 객체 리스트를 -> DTO List에 담아주기
         List<ListBoardResponseDTO> boardResponseDTOS = new ArrayList<>();
@@ -85,10 +81,10 @@ public class BoardService {
     }
 
     /** 특정 게시판 상세 조회 (제목을 통해) **/
-    public BoardResponseDTO SearchBoard(BoardSearchRequestDto requestDTO){
+    public BoardResponseDTO SearchBoard(String title){
 
         // 제목으로 게시글 조회
-        Board board = boardMapper.findBoardTitleSql(requestDTO.getTitle());
+        Board board = boardMapper.findBoardTitleSql(title);
 
         // 조회된 게시글 DTO에 담아서 반환
         return new BoardResponseDTO(board);

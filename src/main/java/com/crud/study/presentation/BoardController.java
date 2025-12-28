@@ -51,9 +51,9 @@ public class BoardController {
 
     /** 이메일로 작성 게시판 전체 조회 API **/
     @GetMapping("/user-email/find-all")
-    public ResponseEntity<List<ListBoardResponseDTO>> searchListBoard(@RequestBody BoardSearchListRequestDto requestDTO){
+    public ResponseEntity<List<ListBoardResponseDTO>> searchListBoard(@RequestParam String email){
 
-        List<ListBoardResponseDTO> responseDTOS = boardService.SearchListBoard(requestDTO);
+        List<ListBoardResponseDTO> responseDTOS = boardService.SearchListBoard(email);
 
         return new ResponseEntity<>(responseDTOS, HttpStatus.OK);
     }
@@ -61,9 +61,9 @@ public class BoardController {
 
     /** 제목으로 게시판 조회 API **/
     @GetMapping("/user-email/find")
-    public ResponseEntity<BoardResponseDTO> searchBoard (@RequestBody BoardSearchRequestDto requestDTO) {
+    public ResponseEntity<BoardResponseDTO> searchBoard (@RequestParam String title) {
 
-        BoardResponseDTO responseDTO = boardService.SearchBoard(requestDTO);
+        BoardResponseDTO responseDTO = boardService.SearchBoard(title);
 
         return new ResponseEntity<>(responseDTO, HttpStatus.OK);
     }

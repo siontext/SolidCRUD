@@ -1,6 +1,6 @@
 package com.crud.study.dto;
 
-import com.crud.study.domain.Board;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class BoardUpdateRequestDto {
 
@@ -11,11 +11,6 @@ public class BoardUpdateRequestDto {
     private String content;
 
 
-    public BoardUpdateRequestDto(Board board){
-        this.id = board.getId();
-        this.title = board.getTitle();
-        this.content = board.getContent();
-    }
 
     public long getId(){
         return id;

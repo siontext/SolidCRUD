@@ -24,13 +24,6 @@
 
 
     <!-- 게시판 수정 SQL -->
-    <!-- 이메일 + 제목으로 사용자가 생성한 게시판 id 찾기 -->
-    <select id="findBoardIdSql" parameterType="com.crud.study.dto.BoardCreateRequestDTO" resultType="java.lang.Long">
-        SELECT id
-        FROM board
-        WHERE user_email = #{email} AND title = #{title}
-    </select>
-
     <!-- id로 게시판 조회 -->
     <select id="findBoardSql" parameterType="long" resultType="Board">
         SELECT id, user_email, title, content, view_count, created_at, updated_at

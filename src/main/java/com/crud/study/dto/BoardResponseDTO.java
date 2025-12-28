@@ -36,4 +36,28 @@ public class BoardResponseDTO {
         this.updateTime=board.getUpdatedAt();
     }
 
+    public long getId(){
+        return id;
+    }
+
+    public String getEmail(){
+        return email;
+    }
+
+    public String getTitle(){
+        return title;
+    }
+
+    public String getContent(){
+        return content;
+    }
+
+    public LocalDateTime getCreateTime(){
+        return createTime;
+    }
+
+    public LocalDateTime getUpdateTime() {
+        return updateTime;
+    }
+
 }

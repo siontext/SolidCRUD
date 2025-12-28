@@ -15,6 +15,7 @@ public interface BoardMapper {
 
     /** 게시판 생성 **/
     // 게시판 생성 sql
+    // 이거 이렇게 짜면 인프라 레이어가 -> 서비스 레이어를 참조하는거라 잘못만든 건가요???
     public void createBoardSql(Board board);
 
 

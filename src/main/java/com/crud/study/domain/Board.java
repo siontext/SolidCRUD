@@ -33,41 +33,37 @@ public class Board implements BoardInterface{
 
 
 
-    // 개시판 생성 생성자
-    public Board(BoardCreateRequestDTO requestDTO){
-        this.email=requestDTO.getEmail();
-        this.title=requestDTO.getTitle();
-        this.content=requestDTO.getContent();
+    // 게시판 생성 생성자
+    /**
+     * Domain 레이어와 <-> DTO 레이어를 분리해야 하는건가요?
+     * 즉 도메인에서 생성자를 만들거나 핵심 비즈니스 로직을 만들때 -> 도메인에서 RequestDTO 사용 하면 안되는 것인가요? 왜 그래야 하는지 모르겠다 ㅠㅠ
+     * **/
+    public Board(long id, String email, String title, String content, int viewCount, LocalDateTime createdAt, LocalDateTime updatedAt){
+        this.id=id;
+        this.email=email;
+        this.title=title;
+        this.content=content;
+        this.viewCount=viewCount;
         this.createdAt=LocalDateTime.now();
+        this.updatedAt=updatedAt;
+    }
+
+    public Board(String email, String title, String content) {
+        this.email=email;
+        this.title=title;
+        this.content=content;
     }
 
 
     // 게시판 수정 (찾은 ID + 들어온 수정된 내용들)
+    /**
+     * 그러면 얘도 잘못된건가? (핵심 비즈니스 로직)
+     * **/
     @Override
-    public void UpdateBoard(long id, BoardUpdateRequestDto requestDTO){
-        this.id= id;
+    public void UpdateBoard(BoardUpdateRequestDto requestDTO){
         this.title=requestDTO.getTitle();
         this.content=requestDTO.getContent();
         this.updatedAt=LocalDateTime.now();
-    }
-
-    // 게시판 삭제
-    @Override
-    public ResponseMessageDTO DeleteBoard(BoardDeleteRequestDto requestDTO){
-        String message = "{requestDTO.title}게시판 삭제가 완료되었습니다.";
-
-        return new ResponseMessageDTO(message);
-    }
-
-
-    @Override
-    public List<ListBoardResponseDTO> ListBoard(){
-        return null;
-    }
-
-    @Override
-    public BoardResponseDTO viewBoard(int BoardNum){
-        return null;
     }
 
 
