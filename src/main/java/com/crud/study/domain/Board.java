@@ -1,10 +1,7 @@
 package com.crud.study.domain;
 
 
-import com.crud.study.dto.BoardRequestDTO;
-import com.crud.study.dto.BoardResponseDTO;
-import com.crud.study.dto.ListBoardResponseDTO;
-import com.crud.study.dto.ResponseMessageDTO;
+import com.crud.study.dto.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -37,7 +34,7 @@ public class Board implements BoardInterface{
 
 
     // 개시판 생성 생성자
-    public Board(BoardRequestDTO requestDTO){
+    public Board(BoardCreateRequestDTO requestDTO){
         this.email=requestDTO.getEmail();
         this.title=requestDTO.getTitle();
         this.content=requestDTO.getContent();
@@ -47,7 +44,7 @@ public class Board implements BoardInterface{
 
     // 게시판 수정 (찾은 ID + 들어온 수정된 내용들)
     @Override
-    public void UpdateBoard(long id, BoardRequestDTO requestDTO){
+    public void UpdateBoard(long id, BoardUpdateRequestDto requestDTO){
         this.id= id;
         this.title=requestDTO.getTitle();
         this.content=requestDTO.getContent();
@@ -56,7 +53,7 @@ public class Board implements BoardInterface{
 
     // 게시판 삭제
     @Override
-    public ResponseMessageDTO DeleteBoard(BoardRequestDTO requestDTO){
+    public ResponseMessageDTO DeleteBoard(BoardDeleteRequestDto requestDTO){
         String message = "{requestDTO.title}게시판 삭제가 완료되었습니다.";
 
         return new ResponseMessageDTO(message);

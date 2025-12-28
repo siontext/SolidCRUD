@@ -25,7 +25,7 @@
 
     <!-- 게시판 수정 SQL -->
     <!-- 이메일 + 제목으로 사용자가 생성한 게시판 id 찾기 -->
-    <select id="findBoardIdSql" parameterType="com.crud.study.dto.BoardRequestDTO" resultType="java.lang.Long">
+    <select id="findBoardIdSql" parameterType="com.crud.study.dto.BoardCreateRequestDTO" resultType="java.lang.Long">
         SELECT id
         FROM board
         WHERE user_email = #{email} AND title = #{title}

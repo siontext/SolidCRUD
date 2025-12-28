@@ -1,12 +1,7 @@
 package com.crud.study.dto;
 
-import java.sql.Timestamp;
-
 // 게시판 관련 요청 DTO
-public class BoardRequestDTO {
-
-    // 게시판 id
-    private final long id;
+public class BoardCreateRequestDTO {
 
     // 작성자 이메일
     private final String email;
@@ -20,8 +15,7 @@ public class BoardRequestDTO {
 
 
     // 생성자
-    public BoardRequestDTO (int id, String title, String content, String email){
-        this.id = id;
+    public BoardCreateRequestDTO( String title, String content, String email){
         this.title = title;
         this.content = content;
         this.email = email;
@@ -29,10 +23,6 @@ public class BoardRequestDTO {
 
 
     // getter
-    public long getId(){
-        return id;
-    }
-
     public String getEmail() {
         return email;
     }

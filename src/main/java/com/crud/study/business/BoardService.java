@@ -1,10 +1,7 @@
 package com.crud.study.business;
 
 import com.crud.study.domain.Board;
-import com.crud.study.dto.BoardRequestDTO;
-import com.crud.study.dto.BoardResponseDTO;
-import com.crud.study.dto.ListBoardResponseDTO;
-import com.crud.study.dto.ResponseMessageDTO;
+import com.crud.study.dto.*;
 import com.crud.study.infrastructure.BoardMapper;
 import org.springframework.stereotype.Service;
 
@@ -24,7 +21,7 @@ public class BoardService {
 
 
     /*** 게시판 생성 (비즈니스 로직은 도메인이 처리)**/
-    public ResponseMessageDTO createBoard (BoardRequestDTO requestDTO){
+    public ResponseMessageDTO createBoard (BoardCreateRequestDTO requestDTO){
 
         // 게시판 객체 생성 (핵심 비즈니스 로직 DDD)
         Board board = new Board(requestDTO);
@@ -39,7 +36,7 @@ public class BoardService {
     }
 
     /** 게시판 수정**/
-    public BoardResponseDTO updateBoard(BoardRequestDTO requestDTO){
+    public BoardResponseDTO updateBoard(BoardUpdateRequestDto requestDTO){
 
         // 이메일 + 제목으로 게시판 id찾기 (클라이언트가 게시판 id는 따로 안준다는 가정)
         long findBoardId = boardMapper.findBoardIdSql(requestDTO);
@@ -58,7 +55,7 @@ public class BoardService {
     }
 
     /*** 게시판 삭제  -> 조회 + 삭제가 인프라 계층에서 이뤄지는 작업이다 보니 도메인객체가 따로 처리할 비즈니스 로직은 없어 보입니다.**/
-    public ResponseMessageDTO DeleteBoard(BoardRequestDTO requestDTO){
+    public ResponseMessageDTO DeleteBoard(BoardDeleteRequestDto requestDTO){
 
         // 삭제할 게시판 조회 (클라이언트가 삭제할 게시판 id를 DTO로 보내주겠죠?)
         Board board = boardMapper.findBoardSql(requestDTO.getId()); // 없으면 오류라고 해주기 -> 익셉션 추가(글로벌 익셉션)
@@ -72,7 +69,7 @@ public class BoardService {
 
 
     /*** 유저가 작성한 게시판 리스트 전체 조회 **/
-    public List<ListBoardResponseDTO> SearchListBoard(BoardRequestDTO requestDTO){
+    public List<ListBoardResponseDTO> SearchListBoard(BoardSearchListRequestDto requestDTO){
 
         // 유저 이메일로 조회한 전체 게시판 객체 리스트
         List<Board> boards = boardMapper.findAllBoardByEmailSql(requestDTO.getEmail());
@@ -88,7 +85,7 @@ public class BoardService {
     }
 
     /** 특정 게시판 상세 조회 (제목을 통해) **/
-    public BoardResponseDTO SearchBoard(BoardRequestDTO requestDTO){
+    public BoardResponseDTO SearchBoard(BoardSearchRequestDto requestDTO){
 
         // 제목으로 게시글 조회
         Board board = boardMapper.findBoardTitleSql(requestDTO.getTitle());

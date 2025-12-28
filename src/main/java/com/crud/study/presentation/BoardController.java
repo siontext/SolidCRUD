@@ -2,10 +2,7 @@ package com.crud.study.presentation;
 
 
 import com.crud.study.business.BoardService;
-import com.crud.study.dto.BoardRequestDTO;
-import com.crud.study.dto.BoardResponseDTO;
-import com.crud.study.dto.ListBoardResponseDTO;
-import com.crud.study.dto.ResponseMessageDTO;
+import com.crud.study.dto.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -25,7 +22,7 @@ public class BoardController {
 
     /** 게시판 생성 API **/
     @PostMapping
-    public ResponseEntity<ResponseMessageDTO> createBoard(@RequestBody BoardRequestDTO requestDTO) {
+    public ResponseEntity<ResponseMessageDTO> createBoard(@RequestBody BoardCreateRequestDTO requestDTO) {
 
         ResponseMessageDTO responseMessageDTO = boardService.createBoard(requestDTO);
 
@@ -35,7 +32,7 @@ public class BoardController {
 
     /** 게시판 수정 API **/
     @PatchMapping
-    public ResponseEntity<BoardResponseDTO> updateBoard(@RequestBody BoardRequestDTO requestDTO) {
+    public ResponseEntity<BoardResponseDTO> updateBoard(@RequestBody BoardUpdateRequestDto requestDTO) {
 
         BoardResponseDTO responseDTO = boardService.updateBoard(requestDTO);
 
@@ -44,7 +41,7 @@ public class BoardController {
 
     /** 게시판 삭제 API **/
     @DeleteMapping
-    public ResponseEntity<ResponseMessageDTO> deleteBoard(@RequestBody BoardRequestDTO requestDTO) {
+    public ResponseEntity<ResponseMessageDTO> deleteBoard(@RequestBody BoardDeleteRequestDto requestDTO) {
 
         ResponseMessageDTO responseMessageDTO = boardService.DeleteBoard(requestDTO);
 
@@ -54,7 +51,7 @@ public class BoardController {
 
     /** 이메일로 작성 게시판 전체 조회 API **/
     @GetMapping("/user-email/find-all")
-    public ResponseEntity<List<ListBoardResponseDTO>> searchListBoard(@RequestBody BoardRequestDTO requestDTO){
+    public ResponseEntity<List<ListBoardResponseDTO>> searchListBoard(@RequestBody BoardSearchListRequestDto requestDTO){
 
         List<ListBoardResponseDTO> responseDTOS = boardService.SearchListBoard(requestDTO);
 
@@ -63,7 +60,8 @@ public class BoardController {
 
 
     /** 제목으로 게시판 조회 API **/
-    public ResponseEntity<BoardResponseDTO> searchBoard (@RequestBody BoardRequestDTO requestDTO) {
+    @GetMapping("/user-email/find")
+    public ResponseEntity<BoardResponseDTO> searchBoard (@RequestBody BoardSearchRequestDto requestDTO) {
 
         BoardResponseDTO responseDTO = boardService.SearchBoard(requestDTO);
 

@@ -1,7 +1,8 @@
 package com.crud.study.infrastructure;
 
 import com.crud.study.domain.Board;
-import com.crud.study.dto.BoardRequestDTO;
+import com.crud.study.dto.BoardCreateRequestDTO;
+import com.crud.study.dto.BoardUpdateRequestDto;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -19,7 +20,7 @@ public interface BoardMapper {
 
     /** 게시판 수정, 삭제 **/
     // 이메일 + 제목으로 게시판 id조회
-    public long findBoardIdSql(BoardRequestDTO requestDTO);
+    public long findBoardIdSql(BoardUpdateRequestDto requestDTO);
 
     // id로 게시판 조회
     public Board findBoardSql(@Param("id") long id);
