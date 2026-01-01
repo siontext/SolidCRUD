@@ -1,15 +1,19 @@
 package com.crud.study.dto;
 
-// 게시판 관련 요청 DTO
+import jakarta.validation.constraints.Size;
+
+// 게시판 생성 요청 DTO
 public class BoardCreateRequestDTO {
 
     // 작성자 이메일
     private final String email;
 
     // 제목
+    @Size(max = 255)
     private final String title;
 
     // 내용
+    @Size(max = 1000)
     private final String content;
 
 

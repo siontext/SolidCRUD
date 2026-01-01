@@ -3,6 +3,7 @@ package com.crud.study.presentation;
 
 import com.crud.study.business.BoardService;
 import com.crud.study.dto.*;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,7 +23,7 @@ public class BoardController {
 
     /** 게시판 생성 API **/
     @PostMapping
-    public ResponseEntity<ResponseMessageDTO> createBoard(@RequestBody BoardCreateRequestDTO requestDTO) {
+    public ResponseEntity<ResponseMessageDTO> createBoard(@Valid @RequestBody BoardCreateRequestDTO requestDTO) {
 
         ResponseMessageDTO responseMessageDTO = boardService.createBoard(requestDTO);
 
@@ -32,7 +33,7 @@ public class BoardController {
 
     /** 게시판 수정 API **/
     @PatchMapping
-    public ResponseEntity<BoardResponseDTO> updateBoard(@RequestBody BoardUpdateRequestDto requestDTO) {
+    public ResponseEntity<BoardResponseDTO> updateBoard(@Valid @RequestBody BoardUpdateRequestDto requestDTO) {
 
         BoardResponseDTO responseDTO = boardService.updateBoard(requestDTO);
 
