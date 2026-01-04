@@ -1,7 +1,7 @@
 package com.crud.study.presentation;
 
 
-import com.crud.study.business.BoardService;
+import com.crud.study.application.BoardService;
 import com.crud.study.dto.*;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;

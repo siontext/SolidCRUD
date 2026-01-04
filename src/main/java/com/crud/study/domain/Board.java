@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 // 게시판 도메인 엔티티 -> 게시판에 대한 책임을 맏음
-public class Board implements BoardInterface{
+public class Board {
 
 
     // 게시판 ID
@@ -59,7 +59,6 @@ public class Board implements BoardInterface{
     /**
      * 그러면 얘도 잘못된건가? (핵심 비즈니스 로직)
      * **/
-    @Override
     public void UpdateBoard(BoardUpdateRequestDto requestDTO){
         this.title=requestDTO.getTitle();
         this.content=requestDTO.getContent();

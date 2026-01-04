@@ -1,4 +1,4 @@
-package com.crud.study.business;
+package com.crud.study.application;
 
 import com.crud.study.domain.Board;
 import com.crud.study.dto.*;

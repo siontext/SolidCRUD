@@ -15,3 +15,7 @@ mybatis:
   type-aliases-package: com.crud.study.domain
   configuration:
     map-underscore-to-camel-case: true
+
+app:
+  hash:
+    secret: change-me
